@@ -1,0 +1,77 @@
+<!-- Модальное окно - Скачай мобильное приложение -->
+<link rel="stylesheet" href="https://stock.app11.ru/company/css/popup/style.css">
+<script type="text/javascript" language="javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<!-- END - Модальное окно - Скачай мобильное приложение -->
+
+<!-- Модальное окно - Скачай мобильное приложение -->
+<div class="bg_aqua_delivery">
+    <div class="close_bg_aqua_delivery prevent_popup"><img src="https://stock.app11.ru/company/popup/close.png" class="close_button" id="close" style="margin-top: 10px"></div>
+    <div class="block_downlaod_aqua_delivery">
+        <img src="https://stock.app11.ru/company/davydovskiykluch.app11.ru/img_popup/mobile_slider.png" class="mobile_slider">
+        <div class="text1_block_download">Скачай приложение <br> и заказывай удобно!</div>
+        <div class="text2_block_download">Доступно бесплатно для iOS и Android</div>
+        <img src="https://chart.googleapis.com/chart?cht=qr&chs=350x350&chld=H|1&chl=https://s.app11.io/I1qqql2" class="qr_code">
+        <a type="button" class="prevent_popup" href="https://apps.apple.com/us/app/%D0%B4%D0%B0%D0%B2%D1%8B%D0%B4%D0%BE%D0%B2%D1%81%D0%BA%D0%B8%D0%B9-%D0%BA%D0%BB%D1%8E%D1%87-%D0%B2%D0%BB%D0%B0%D0%B4%D0%B8%D0%B2%D0%BE%D1%81%D1%82%D0%BE%D0%BA/id1549222724" target="_blank"><img src="https://stock.app11.ru/company/popup/AppStore_New2.png" class="apple_block_download"></a>
+        <a type="button" class="prevent_popup" href="https://play.google.com/store/apps/details?id=ru.aquadelivery.davydovskiykluch.client" target="_blank"><img src="https://stock.app11.ru/company/popup/Google_Play_New2.png" class="google_block_download"></a>
+    </div>
+</div>
+<script type="text/javascript" language="javascript">
+
+    // Время в секундах с открытия страницы и до появления модального окна 
+    var startTimeout = 3;
+    // Время в днях до появления модального окна вновь после его закрытия
+    var restartTimeout = 3;
+    
+    // Селектор контейнера с модальным окном
+    var popupContainer = "div.bg_aqua_delivery";
+    // Селектор кнопки закрытия модального окна
+    var closeButton = "div#close_btn";
+    // Селектор элементов, после нажатия на которые модальное окно не должно появляться в течение установленного таймаута
+    var preventPopupElement = ".prevent_popup"
+    // Название cookie, для определения должно ли появляться модальное окно
+    var preventPopupCookie = "__PreventShowCustomPopup";
+    
+    function setCookie(name, value, expirationDays) {
+        var expirationDate = new Date();
+        expirationDate.setTime(expirationDate.getTime() + (expirationDays * 24 * 60 * 60 * 1000));
+        var expires = "expires=" + expirationDate.toGMTString();
+        document.cookie = name + "=" + value + ";" + expires + ";path=/";
+    }
+    
+    function getCookie(name) {
+        var namePart = name + "=";
+        var decodedCookies = decodeURIComponent(document.cookie);
+        var allCookies = decodedCookies.split(';');
+        for(var i = 0; i < allCookies.length; i++) {
+            var cookie = allCookies[i];
+            while (cookie.charAt(0) == ' ') {
+                cookie = cookie.substring(1);
+            }
+            if (cookie.indexOf(namePart) == 0) {
+                return cookie.substring(namePart.length, cookie.length);
+            }
+        }
+        return "";
+    }
+    
+    function togglePopup() {
+        $(popupContainer).fadeToggle(200);
+    }
+    
+    function initPopup() {
+        if (!getCookie(preventPopupCookie)) {
+            $(preventPopupElement).click(function () {
+                setCookie(preventPopupCookie, 1, restartTimeout);
+                togglePopup();
+            });
+            setTimeout(togglePopup, startTimeout * 1000);
+        }
+    }
+    
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initPopup());
+    } else {
+        initPopup();
+    }
+    </script>   
+<!-- END - Модальное окно - Скачай мобильное приложение -->

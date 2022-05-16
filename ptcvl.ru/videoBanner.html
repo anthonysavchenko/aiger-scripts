@@ -1,0 +1,65 @@
+<html>
+<div class="customVideoBannerAnchor"></div>
+</html>
+
+<script>
+/* Скрипт находит HTML-элемент и заменяет его на видео-баннер. Сам HTML-элемент и все его содержимое размещается поверх баннера (внутри него) */
+
+
+/* Адрес видео в формате .webm (абсолютный или относительный адрес) */
+/* Конвертер https://video.online-convert.com/ru/convert-to-webm */
+var videoWebmSource = '/uploads/assets/2022/02/04/video.webm';
+
+/* Адрес видео в формате .mp4 (абсолютный или относительный адрес) */
+/* Конвертер https://video.online-convert.com/ru/convert-to-mp4 */
+var videoMp4Source = '/uploads/assets/2022/02/04/video.mp4';
+
+/* Адрес изображения для отображения превью на время загрузки видео или при его отсутствии */
+var imagePreviewSource = '/uploads/assets/2020/10/06/fon.jpg';
+
+
+/* Класс элемента div, используемого для поиска HTML-элемента, который будет размещен на видео-баннере */
+var containerSelector = '.customVideoBannerAnchor';
+
+var container = document.querySelector(containerSelector).parentElement.previousElementSibling;
+var oldContent = Array.prototype.slice.call(container.children);
+
+container.innerHTML =
+    '<section style="' +
+        'background-image: url(' + imagePreviewSource + ');' +
+        'position: relative;' +
+        'overflow: hidden;' +
+        'background-size: cover;' +
+        'background-position: center center;' +
+        '">' +
+
+        '<video loop muted autoplay playsinline poster="' + imagePreviewSource + '" style="' +
+            'position: absolute;' +
+            'top: 0;' +
+            'left: 0;' +
+            'min-width: 0;' +
+            'min-height: 0;' +
+            'transform: none;' +
+            'object-fit: cover;' +
+            'width: 100%;' +
+            'height: 100%;' +
+            '">' +
+
+            '<source src="' + videoWebmSource + '" type=\'video/webm; codecs="vp8, vorbis"\'>' +
+            '<source src="' + videoMp4Source + '" type=\'video/mp4; codecs="avc1.42E01E, mp4a.40.2"\'>' +
+
+        '</video>' +
+
+        '<div style="' +
+            'display: inline-block;' +
+            'position: relative;' +
+            'width: 100%;' +
+            'z-index: 2;' +
+            '">' +
+        '</div>' +
+    '</section>';
+
+oldContent.forEach(function(child) {
+    container.lastElementChild.lastElementChild.appendChild(child);
+});
+</script>
