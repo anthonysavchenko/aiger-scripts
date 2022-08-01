@@ -1,18 +1,18 @@
 <script>
     // Скрипт для включения/выключения зависимых чекбоксов
 
-    var enabledColor = 'var(--color-text)';
-    var disabledColor = '#C5C5C5';
-    var masterCheckBox = document.getElementById('widget_46');
+    var enabledColor = "var(--color-text)";
+    var disabledColor = "#C5C5C5";
+    var masterCheckBox = document.getElementById("widget_46");
     var slaveCheckBoxes = [
-        document.getElementById('widget_52'),
-        document.getElementById('widget_55')
+        document.getElementById("widget_52"),
+        document.getElementById("widget_55"),
     ];
     var slaveLabelAreas = [
-        document.getElementById('layout__columnizer_22'),
-        document.getElementById('layout__columnizer_23'),
+        document.getElementById("layout__columnizer_22"),
+        document.getElementById("layout__columnizer_23"),
     ];
-    
+
     function onMasterCheckBoxChange(checked) {
         slaveCheckBoxes.forEach(function (checkBox) {
             if (!checked) {
@@ -21,56 +21,56 @@
             checkBox.disabled = !checked;
         });
         slaveLabelAreas.forEach(function (area) {
-            area.querySelectorAll('p').forEach(function (paragraph) {
+            area.querySelectorAll("p").forEach(function (paragraph) {
                 paragraph.style.color = checked ? enabledColor : disabledColor;
             });
         });
     }
 
-    masterCheckBox.addEventListener(
-        'change',
-        function (event) {
-            onMasterCheckBoxChange(event.target.checked);
-        }
-    );
+    masterCheckBox.addEventListener("change", function (event) {
+        onMasterCheckBoxChange(event.target.checked);
+    });
     onMasterCheckBoxChange(masterCheckBox.checked);
-    
-    
+
     // Скрипт для привязывания щелчка по подписи к щелчку по чекбоксу
-    
+
     [
         // 3
-        {checkBox: 'widget_15', labelArea: 'layout__columnizer_9'},
-        {checkBox: 'widget_18', labelArea: 'layout__columnizer_10'},
+        { checkBox: "widget_15", labelArea: "layout__columnizer_9" },
+        { checkBox: "widget_18", labelArea: "layout__columnizer_10" },
 
         // 4
-        {checkBox: 'widget_24', labelArea: 'layout__columnizer_13'},
-        {checkBox: 'widget_28', labelArea: 'layout__columnizer_14'},
-        {checkBox: 'widget_31', labelArea: 'layout__columnizer_15'},
+        { checkBox: "widget_24", labelArea: "layout__columnizer_13" },
+        { checkBox: "widget_28", labelArea: "layout__columnizer_14" },
+        { checkBox: "widget_31", labelArea: "layout__columnizer_15" },
 
         // 5
-        {checkBox: 'widget_37', labelArea: 'layout__columnizer_17'},
-        {checkBox: 'widget_40', labelArea: 'layout__columnizer_18'},
-        
+        { checkBox: "widget_37", labelArea: "layout__columnizer_17" },
+        { checkBox: "widget_40", labelArea: "layout__columnizer_18" },
+
         // 6
-        {checkBox: 'widget_46', labelArea: 'layout__columnizer_20'},
+        { checkBox: "widget_46", labelArea: "layout__columnizer_20" },
 
         // 7
-        {checkBox: 'widget_52', labelArea: 'layout__columnizer_22'},
-        {checkBox: 'widget_55', labelArea: 'layout__columnizer_23'},
+        { checkBox: "widget_52", labelArea: "layout__columnizer_22" },
+        { checkBox: "widget_55", labelArea: "layout__columnizer_23" },
     ].forEach(function (pair) {
         var area = document.getElementById(pair.labelArea);
         var checkbox = document.getElementById(pair.checkBox);
 
-        checkbox.addEventListener('click', function (event) {
+        checkbox.addEventListener("click", function (event) {
             event.stopPropagation();
         });
-        checkbox.style.cursor = 'pointer';
-        checkbox.parentElement.style.cursor = 'pointer';
+        checkbox.style.cursor = "pointer";
+        checkbox.parentElement.style.cursor = "pointer";
 
-        area.addEventListener('click', function (event) {
+        area.addEventListener("click", function (event) {
             checkbox.click();
         });
-        area.style.cursor = 'pointer';
+        area.style.cursor = "pointer";
     });
+
+    // Скрипт для того, чтобы нельзя было редакитровать домен
+
+    document.getElementById("widget_26").readOnly = true;
 </script>
